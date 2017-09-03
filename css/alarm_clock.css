@@ -1,0 +1,77 @@
+
+body {
+/*  font-family: atomic clock radio;
+*/  background: black;
+}
+h1 {
+  color: white;
+  text-align: center;
+}
+.fullDisplay {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.clock {
+  color: #1BEB29;
+  font-size: 80px;
+  border: 1px solid gray;
+  padding: 0px 5px;
+}
+.setAlarmFlex {
+  display: flex;
+}
+.setAlarm {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
+#hrInput {
+  flex: 1;
+}
+#minInput {
+  flex: 1;
+}
+#alarmButton {
+  flex: 1;
+}
+#radioButtons {
+  flex: 1;
+}
+
+input[type=text] {
+  height: 50px;
+  width: 50px;
+  font-size: 18px;
+}
+input[type=button] {
+  height: 56px;
+  width: 56px;
+  border: none;
+  background-image: url(../img/alarmBell.jpeg);
+  background-position: 56px 56px;
+}
+label {
+  color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

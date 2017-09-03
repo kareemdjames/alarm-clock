@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Alarm Clock</title>
+  <link rel="stylesheet" type="text/css" href="css/alarm_clock.css">
+</head>
+<body>
+  <div class="fullDisplay">
+    <div id="alarmDisplay">
+      <h1 id="ad"></h1>
+    </div>
+    <div class="clock" id="display"></div>
+    <h1>Please set your alarm below!</h1>
+    <div class="setAlarmFlex">
+      <div class="setAlarm">
+        <div id="hrInput">
+          <input id="aHr" type="text" name="Hr" placeholder="Hour">
+        </div>
+        <div id="minInput">
+          <input id="aMin" type="text" name="Min" placeholder="Min">
+        </div>
+        <div id="alarmButton">
+          <input id="aButton" type="image" src="img/alarmBell.jpeg" style="height: 56px; width: 56px;" value="Set Alarm" onclick="setAlarm()">
+        </div>
+        <div id="radioButtons">
+          <input id="am" type="radio" name="am" value="am">
+          <label for="am">AM</label>
+          <input id="pm" type="radio" name="pm" value="pm">
+          <label for="pm">PM</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <audio id="audio" src="audio/alarm.mp3"></audio>
+  
+  <script type="text/javascript">
+  function playSound() {
+    var sound = document.getElementById('audio');
+    sound.play()
+  }
+  </script>
+
+  <script type="text/javascript">
+    // function that sets the time and calls the hours, minutes and seconds indivdually
+    function displayTime() {
+      var date = new Date();
+      var hr = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      var amOrPm = "AM";
+      // converts from military time
+      if(hr === 0){
+        amOrPm = "PM";
+      }
+      if(hr > 12){
+        hr = hr - 12;
+        amOrPm = "PM";
+      }
+      // if the hour, min or sec is a single digit it adds a zero in front of it
+      hr = (hr < 10) ? "0" + hr : hr;
+      min = (min < 10) ? "0" + min : min;
+      sec = (sec < 10) ? "0" + sec : sec;
+      // displays the time more readable and then sets the display to the time
+      var time = hr + ":" + min + ":" + sec + " " + amOrPm;
+      document.getElementById('display').innerHTML = time;
+      // makes the clock run instead of static time
+      setInterval(displayTime, 1000);
+    }
+     displayTime();
+  </script>
+  
+  <script type="text/javascript">
+    // function that sets the alarm
+    function setAlarm() {
+      var cDate = new Date();
+      var cHr = cDate.getHours();
+      var cMin = cDate.getMinutes();
+      var aHrs = document.getElementById('aHr').value;
+      var aMins = document.getElementById('aMin').value;
+      var amOrPm = "AM"
+      //refer to comments in function above they are the same
+      if(cHr === 0){
+          amOrPm = "PM";
+      }
+      if(cHr > 12){
+        cHr = cHr - 12;
+        amOrPm = "PM";
+      }
+      if(aHrs == cHr && aMins == cMin) {
+        playSound();
+        changeBackground();
+      }
+      cHr = (cHr < 10) ? "0" + cHr : cHr;
+      cMin = (cMin < 10) ? "0" + cMin : cMin;
+      // sets the alarm display located in a div above the running time
+      function setAlarmDisplay() {
+        var display = "Your alarm has been set for " + aHrs + ":" + aMins + " " + amOrPm;
+        document.getElementById('ad').innerHTML = display;
+      }
+      setInterval(setAlarm, 1000);
+      setAlarmDisplay();
+    }
+  </script>
+ <!-- function to change the background color between red and black once the alarm goes off -->
+  <script type="text/javascript">
+    var x;
+    function changeBackground() {
+      x = 1;
+      setInterval(change, 200)
+    }
+    function change() {
+      if(x === 1) {
+        color = "red";
+        x = 2;
+      } else {
+        color = "black";
+        x = 1;
+      }
+        document.body.style.background = color;    
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
